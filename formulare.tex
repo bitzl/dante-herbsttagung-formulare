@@ -1,0 +1,116 @@
+\documentclass{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+
+\usepackage{hyperref}
+\usepackage[german=guillemets]{csquotes}
+\usepackage{minted}
+
+\begin{document}
+
+\section{Beispiel: Tutorbetrieb}
+
+\section{Blah}
+\section{Das Problem}
+\begin{frame}{Situation: Viele Hospitationen jedes Semester}
+Jedes Semester
+\begin{itemize}
+	\item Hospitationen für 60-80 Tutoren je Semester
+	\item jeder Tutor $2\times$ (später $1-2$ mal)
+	\item Verteilt an $2-3$ Mitarbeiter
+	\item Viele Hospitationen sind auch noch parallel
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Situation: Hospitationen sind knapp}
+Dabei hat jede Hospitation
+\begin{itemize}
+\item ca 45 Minuten
+\item + \enquote{Anreise} durch das Gebäude
+\item + wenn möglich vorher mit Tutor sprechen (je nach Tutor).
+\item[$\Rightarrow$] min. 1 Stunde
+\end{itemize}
+Manchmal müssen zwei nacheinander nahtlos erfolgen, manchmal ist spontanes Umplanen nötig (z.B. Tutor krank, keine Studenten da,...).
+\end{frame}
+
+\begin{frame}{Unsere Lösung: Webanwendung zur Hospitationsplanung}
+\begin{itemize}
+	\item Ein Kalender zeigt alle noch offenen Hospitationen mit Vormerkungen
+	\item Die Bewertungsbögen können schnell erstellt und heruntergeladen werden.
+	\item Die selbe Webanwendung dient auch für das Bewerbermanagement und der Berechnung und Generierung von Vertragsunterlagen
+\end{itemize}
+\end{frame}
+
+\begin{frame}{1. Idee: TeX generieren und PDF erzeugen (verworfen)}
+Idee:
+\begin{itemize}
+	\item Webanwendung erzeugt eine TeX-Datei
+	\item TeX erzeugt das PDF für den Benutzer
+\end{itemize}
+Problem:
+\begin{itemize}
+\item ansynchrone Ausführung: Webanwendung startet \LaTeX und muss prüfen, wann der Lauf beendet ist
+\item der Client darf nicht \enquote{hängen} $\to$ Polling
+\item ein \LaTeX -Lauf dauert ca. $30 - 45$ Sekunden
+\item Entwickelt auf Windows, läuft unter Linux: Fehlerquellen beim Testen
+\item[$\Rightarrow$] zu Komplex
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Unsere Lösung: PDF-Formulare ausfüllen}
+\begin{itemize}
+\item Der Hospitationsbogen wird mit \LaTeX erzeugt
+\item Die Webanwendung füllt die Felder mit Werten aus der Datenbank
+\item Der Benutzer erhält das Dokument in Sekunden
+\item Die Ausführung ist synchron
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Unsere Lösung: Die Architektur}
+\begin{center}
+\Huge
+Grafik
+\end{center}
+\end{frame}
+
+
+\begin{frame}{Formulare mit \LaTeX: Beispiel}
+	\begin{center}
+	\Huge
+	\enquote{Minihosptiationsbogen}
+	\end{center}
+	\TextField{Hallo}
+\end{frame}
+
+\begin{frame}[fragile]{}
+\frametitle{Formulare mit \LaTeX: Beispiel -- der Code}
+
+\begin{minted}{latex}
+\begin{framed}
+    \TextField{Name} % <--- Formularfeld
+
+    \hrulefill
+
+    \begin{center}
+        \Huge
+        Uncool\hspace{0.5em}
+        $\circ\circ\circ\circ\circ$
+        \hspace{0.5em} Cool
+    \end{center}
+    \smallskip
+\end{framed}
+\end{minted}
+\end{frame}
+
+\begin{frame}{Fomulare mit hyperref}
+\end{frame}
+
+\begin{frame}{Alternativen (?)}
+\end{frame}
+
+\begin{frame}{Ausfüllen mit iText}
+\end{frame}
+
+\end{document}
