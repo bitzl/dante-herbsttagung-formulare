@@ -1,0 +1,29 @@
+\documentclass{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+\usepackage{hyperref}
+\usepackage{framed}
+\renewcommand{\familydefault}{\sfdefault}
+
+\setlength{\parindent}{0cm}
+
+\begin{document}
+\begin{framed}
+\begin{Form}
+\TextField[name=Name]{Name}
+
+
+\hrulefill
+
+\begin{center}
+\Huge Uncool\hspace{0.5em}
+\large
+\ChoiceMenu[radio,name=coolness]{}{{}={uncool},{}={fast uncool},{}={wer ist das?},{}={eher cool},{}={saucool}}
+\Huge \hspace{0.5em} Cool
+\end{center}
+\smallskip
+\end{Form}
+\end{framed}
+\end{document}

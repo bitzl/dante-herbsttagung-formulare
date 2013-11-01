@@ -1,0 +1,33 @@
+\documentclass{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+\usepackage{hyperref}
+\usepackage{framed}
+\renewcommand{\familydefault}{\sfdefault}
+
+\setlength{\parindent}{0cm}
+
+\begin{document}
+\begin{framed}
+\begin{Form}
+\TextField[name=Name]{Name}
+
+
+\hrulefill
+
+\begin{center}
+\Huge Uncool\hspace{0.5em}
+\large
+\CheckBox[checked,name=C0]{}
+\CheckBox[name=C1]{}
+\CheckBox[name=C2]{}
+\CheckBox[name=C3]{}
+\CheckBox[name=C4]{}
+\Huge \hspace{0.5em} Cool
+\end{center}
+\smallskip
+\end{Form}
+\end{framed}
+\end{document}
