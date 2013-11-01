@@ -1,13 +1,10 @@
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.Map;
 
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.pdf.AcroFields;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfStamper;
-import com.itextpdf.text.pdf.AcroFields.Item;
 
 
 public class ExamplePlus {
@@ -23,21 +20,6 @@ public class ExamplePlus {
 		form.setField(field, states[evaluation]);
 	}
 
-	public static void printCheckboxValues(AcroFields form) throws IOException, DocumentException {
-		FieldPrinter printer = new FieldPrinter(form);
-		printer.printFields();
-		for (int i = 0; i < 5; i++) {
-			printer.print("C" + i);
-		}
-	}
-	
-	public static void printCheckboxChoices(AcroFields form) throws IOException, DocumentException {
-		FieldPrinter printer = new FieldPrinter(form);
-		for (int i = 0; i < 5; i++) {
-			printer.printChoices("C" + i);
-		}
-	}
-	
 	public static void process(String source, String dest) throws IOException, DocumentException {
 		PdfReader reader = new PdfReader(source);
 		PdfStamper stamper = new PdfStamper(reader, new FileOutputStream(dest));
@@ -46,31 +28,6 @@ public class ExamplePlus {
 		grade(form);
 		stamper.close();
 		reader.close();
-		
-	}
-
-	public static void printFields(AcroFields form) {
-		System.out.println("Fields:");
-		Map<String, Item> fields = form.getFields();
-		for (String fieldname : fields.keySet()) {
-			System.out.println(fieldname);
-		}
-	}
-	
-	public static void printAllStates(AcroFields form) {
-		Map<String, Item> fields = form.getFields();
-		for (String fieldname : fields.keySet()) {
-			System.out.println(fieldname);
-			String[] states = form.getAppearanceStates(fieldname);
-			if (states.length > 0) {
-				for (String state : states) {
-					System.out.println("\t" + state);
-				}
-			}
-			else {
-				System.out.println("-- None --");
-			}
-		}
 	}
 	
 	public static void main(String[] args) throws IOException, DocumentException {

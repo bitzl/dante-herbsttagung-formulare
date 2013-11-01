@@ -1,6 +1,10 @@
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Map;
 
 import com.itextpdf.text.pdf.AcroFields;
+import com.itextpdf.text.pdf.PdfReader;
+import com.itextpdf.text.pdf.PdfStamper;
 import com.itextpdf.text.pdf.AcroFields.Item;
 
 public class FieldPrinter {
@@ -32,5 +36,32 @@ public class FieldPrinter {
 		for (String field : fieldMap.keySet()) {
 			System.out.println(field);
 		}
+	}
+
+	public void printAllStates() {
+		Map<String, Item> fieldsMap = fields.getFields();
+		for (String fieldname : fieldsMap.keySet()) {
+			System.out.println(fieldname);
+			String[] states = fields.getAppearanceStates(fieldname);
+			if (states.length > 0) {
+				for (String state : states) {
+					System.out.println("\t" + state);
+				}
+			}
+			else {
+				System.out.println("\t-- None --");
+			}
+		}
+	}
+
+	public static void main(String[] args) throws IOException {
+		String source = "beispiele/tex/minibogen-plus.pdf";
+		PdfReader reader = new PdfReader(source);
+		AcroFields fields = reader.getAcroFields();
+
+		FieldPrinter printer = new FieldPrinter(fields);
+		printer.printAllStates();
+		
+		reader.close();
 	}
 }
