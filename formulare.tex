@@ -153,7 +153,7 @@ Problem:
 
 \begin{frame}{Formulare mit \LaTeX: Minihosptiationsbogen}
 	\begin{framed}
-        \TextField{Name} % <--- Formularfeld
+        \TextField[name=name]{Name} % <--- Formularfeld
 
 	    \hrulefill
 
@@ -172,7 +172,7 @@ Problem:
 \begin{minted}{latex}
 \begin{framed}
     \begin{Form}
-        \TextField{Name} % <--- Formularfeld
+        \TextField[name=name]{Name} % <--- Formularfeld
     \end{Form}
 
     \hrulefill
@@ -343,6 +343,7 @@ protected void doGet(HttpServletRequest req,
     PdfReader reader = new PdfReader("minibogen.pdf");
     OutputStream out = response.getOutputStream();
 
+    response.setContentType("application/pdf");
     PdfStamper stamper = new PdfStamper(reader, out);
     AcroFields form = stamper.getAcroFields();
     form.setField("Name", "Hans Wurst");
@@ -426,6 +427,12 @@ Mehr unter
 	\url{http://www.pdflabs.com/docs/pdftk-man-page/#dest-op-fill-form}
 \end{center}
 
+\end{frame}
+
+\begin{frame}{Material im Internet}
+\begin{center}
+	\url{https://github.com/bitzl/dante-herbsttagung-formulare}
+\end{center}
 \end{frame}
 
 \begin{frame}[fragile]{Alternativen}
